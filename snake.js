@@ -3,7 +3,8 @@ const grid = document.querySelector('.grid')
 const startButton = document.querySelector('#start')
 const score = document.querySelector('#score')
 let squares = []
-let currentSnake = [0, 1, 2]
+let currentSnake = [2, 1, 0]
+let direction = 1
 
 //to generate the playing field 
 const createGrid = () => {
@@ -23,3 +24,18 @@ createGrid()
 
 //this draws the snake on the page
 currentSnake.forEach(index => squares[index].classList.add('snake'))
+
+//move the snake
+const move = () => {
+  //remove the tail
+  const tail = currentSnake.pop()
+  //remove the styling
+  squares[tail].classList.remove('snake')
+  //add square in direction we're moving
+  currentSnake.unshift(currentSnake[0] + direction)
+  //add styling
+  squares[currentSnake[0]].classList.add('snake')
+}
+move()
+
+
