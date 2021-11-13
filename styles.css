@@ -19,3 +19,7 @@ html, body {
   width: 20px;
   height: 20px;
 }
+
+.snake {
+  background-color: green;
+}

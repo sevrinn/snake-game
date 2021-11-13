@@ -3,6 +3,7 @@ const grid = document.querySelector('.grid')
 const startButton = document.querySelector('#start')
 const score = document.querySelector('#score')
 let squares = []
+let currentSnake = [0, 1, 2]
 
 //to generate the playing field 
 const createGrid = () => {
@@ -19,3 +20,6 @@ const createGrid = () => {
   }
 }
 createGrid()
+
+//this draws the snake on the page
+currentSnake.forEach(index => squares[index].classList.add('snake'))
