@@ -23,3 +23,7 @@ html, body {
 .snake {
   background-color: green;
 }
+
+.fruit {
+  background-color: blue;
+}

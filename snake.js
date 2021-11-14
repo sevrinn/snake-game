@@ -5,9 +5,10 @@ const score = document.querySelector('#score')
 let squares = []
 let currentSnake = [2, 1, 0]
 let direction = 1
-let width = 10
+const width = 10
+let fruitIndex = 0
 
-//to generate the playing field 
+//to generate the playing field grid
 const createGrid = () => {
   //run for loop 100 times
   for (let i = 0; i < width * width; i++) {
@@ -36,19 +37,30 @@ const move = () => {
     (currentSnake[0] - width <= 0 && direction === -width) || //if snake hits bottom
     squares[currentSnake[0] + direction].classList.contains('snake') //if snake hits itself
   )
+  //stops game if any of this is detected
   return clearInterval(timerId)
 
   //remove the tail
   const tail = currentSnake.pop()
   //remove the styling
   squares[tail].classList.remove('snake')
-  //add square in direction we're moving
+  //add square (new head) in direction we're moving
   currentSnake.unshift(currentSnake[0] + direction)
   //add styling
   squares[currentSnake[0]].classList.add('snake')
 }
 
+//has move run every second (slow af, lol)
 const timerId = setInterval(move, 1000)
+
+//generate fruit on screen
+const generateFruit = () => {
+  do {
+    fruitIndex = Math.floor(Math.random() * squares.length)
+    } while (squares[fruitIndex].classList.contains('snake'))
+  squares[fruitIndex].classList.add('fruit')
+}
+generateFruit()
 
 
 const control = (e) => {
