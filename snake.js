@@ -1,9 +1,17 @@
-//get elements
+//get DOM elements
 const grid = document.querySelector('.grid')
 const startButton = document.querySelector('#start')
 const score = document.querySelector('#score')
+
+//create some required variables
+
+// a place to generate grid
 let squares = []
+
+//our beginning baby snek 🐍
 let currentSnake = [2, 1, 0]
+
+//x axis
 let direction = 1
 const width = 10
 let fruitIndex = 0
@@ -24,12 +32,12 @@ const createGrid = () => {
 }
 createGrid()
 
-//this draws the snake on the page
+//this draws that ol snake on the page
 currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 //move the snake
 const move = () => {
-  //check if snake head has hit wall or itself
+  //check if snakes head has hit wall or itself
   if (
     (currentSnake[0] + width >= width * width && direction === width) || //if snake hits top
     (currentSnake[0] % width === width - 1 && direction === 1) || //if snake hits right
@@ -37,7 +45,7 @@ const move = () => {
     (currentSnake[0] - width <= 0 && direction === -width) || //if snake hits bottom
     squares[currentSnake[0] + direction].classList.contains('snake') //if snake hits itself
   )
-  //stops game if any of this is detected
+  //stops game if any of the above is detected
   return clearInterval(timerId)
 
   //remove the tail
@@ -50,7 +58,7 @@ const move = () => {
   squares[currentSnake[0]].classList.add('snake')
 }
 
-//has move run every second (slow af, lol)
+//snake moves automatically every second (slow af, lol)
 const timerId = setInterval(move, 1000)
 
 //generate fruit on screen
@@ -62,25 +70,30 @@ const generateFruit = () => {
 }
 generateFruit()
 
-
+//directional control
 const control = (e) => {
   if (e.key === 'ArrowRight') {
     console.log('right pressed')
+    //move right
     direction = 1
   } else if (e.key === 'ArrowUp') {
     console.log('up pressed')
+    //move up
     direction = -width
     console.log(direction)
   } else if (e.key === 'ArrowDown') {
     console.log('down pressed')
+    //move down
     direction = +width
     
   } else if (e.key === 'ArrowLeft') {
     console.log('left pressed')
+    //move left
     direction = -1
     
   }
 }
-document.addEventListener('keyup', control)
+//document is listening for anytime a key is pressed down and then in runs control()
+document.addEventListener('keydown', control)
 
 
