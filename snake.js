@@ -40,4 +40,17 @@ const move = () => {
 const timerId = setInterval(move, 1000)
 clearInterval(timerId)
 
+const control = (e) => {
+  if (e.key === 'ArrowRight') {
+    console.log('right pressed')
+  } else if (e.key === 'ArrowUp') {
+    console.log('up pressed')
+  } else if (e.key === 'ArrowDown') {
+    console.log('down pressed')
+  } else if (e.key === 'ArrowLeft') {
+    console.log('left pressed')
+  }
+}
+document.addEventListener('keyup', control)
+
 
