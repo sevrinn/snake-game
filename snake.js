@@ -10,7 +10,7 @@ let width = 10
 //to generate the playing field 
 const createGrid = () => {
   //run for loop 100 times
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < width * width; i++) {
     //create div element
     const square = document.createElement('div')
     //add style to the element
@@ -30,10 +30,10 @@ currentSnake.forEach(index => squares[index].classList.add('snake'))
 const move = () => {
   //check if snake head has hit wall or itself
   if (
-    (currentSnake[0] + width >= 100 && direction === 10) || //if snake hits top
-    (currentSnake[0] % width === 9 && direction === 1) || //if snake hits right
+    (currentSnake[0] + width >= width * width && direction === width) || //if snake hits top
+    (currentSnake[0] % width === width - 1 && direction === 1) || //if snake hits right
     (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left
-    (currentSnake[0] - width <= 0 && direction === -10) || //if snake hits bottom
+    (currentSnake[0] - width <= 0 && direction === -width) || //if snake hits bottom
     squares[currentSnake[0] + direction].classList.contains('snake') //if snake hits itself
   )
   return clearInterval(timerId)
