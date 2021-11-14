@@ -5,6 +5,7 @@ const score = document.querySelector('#score')
 let squares = []
 let currentSnake = [2, 1, 0]
 let direction = 1
+let width = 10
 
 //to generate the playing field 
 const createGrid = () => {
@@ -43,12 +44,16 @@ clearInterval(timerId)
 const control = (e) => {
   if (e.key === 'ArrowRight') {
     console.log('right pressed')
+    direction = 1
   } else if (e.key === 'ArrowUp') {
     console.log('up pressed')
+    direction = -width
   } else if (e.key === 'ArrowDown') {
     console.log('down pressed')
+    direction = +width
   } else if (e.key === 'ArrowLeft') {
     console.log('left pressed')
+    direction = -1
   }
 }
 document.addEventListener('keyup', control)
