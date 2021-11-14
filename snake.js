@@ -28,6 +28,16 @@ currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 //move the snake
 const move = () => {
+  //check if snake head has hit wall or itself
+  if (
+    (currentSnake[0] + width >= 100 && direction === 10) || //if snake hits top
+    (currentSnake[0] % width === 9 && direction === 1) || //if snake hits right
+    (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left
+    (currentSnake[0] - width <= 0 && direction === -10) || //if snake hits bottom
+    squares[currentSnake[0] + direction].classList.contains('snake') //if snake hits itself
+  )
+  return clearInterval(timerId)
+
   //remove the tail
   const tail = currentSnake.pop()
   //remove the styling
@@ -39,7 +49,7 @@ const move = () => {
 }
 
 const timerId = setInterval(move, 1000)
-clearInterval(timerId)
+
 
 const control = (e) => {
   if (e.key === 'ArrowRight') {
@@ -48,12 +58,15 @@ const control = (e) => {
   } else if (e.key === 'ArrowUp') {
     console.log('up pressed')
     direction = -width
+    console.log(direction)
   } else if (e.key === 'ArrowDown') {
     console.log('down pressed')
     direction = +width
+    
   } else if (e.key === 'ArrowLeft') {
     console.log('left pressed')
     direction = -1
+    
   }
 }
 document.addEventListener('keyup', control)
