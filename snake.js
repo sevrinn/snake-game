@@ -42,7 +42,28 @@ createGrid()
 currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 const startGame = () => {
-  //snake moves automatically every second (slow af, lol)
+  //this starts and resets the game
+  //remove snake
+  currentSnake.forEach(index => squares[index].classList.remove('snake'))
+  //remove fruit
+  squares[fruitIndex].classList.remove('fruit')
+  //clear interval
+  clearInterval(timerId)
+  timeInterval = 1000
+  //start snake from beginning position
+  currentSnake = [2, 1, 0]
+  //reset score
+  score = 0
+  scoreDisplay.textContent = 0
+  //reset direction
+  direction = 1
+  //reset interval
+  intervalTime = 1000
+  //generate fruit
+  generateFruit()
+  //add snake class to new currentSnake
+  currentSnake.forEach(index => squares[index].classList.add('snake'))
+  //snake moves automatically every second to start out (slow af, lol)
   timerId = setInterval(move, timeInterval)
 }
 
