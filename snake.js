@@ -50,10 +50,28 @@ const move = () => {
 
   //remove the tail
   const tail = currentSnake.pop()
+
   //remove the styling
   squares[tail].classList.remove('snake')
+
   //add square (new head) in direction we're moving
   currentSnake.unshift(currentSnake[0] + direction)
+
+  //snake head eating apple 
+  if (squares[currentSnake[0]].classList.contains('fruit')) {
+    //remove apple class
+    squares[currentSnake[0]].classList.remove('fruit')
+    //grow snake by adding snake class
+    squares[tail].classList.add('snake')
+    
+    //grow snake array
+    currentSnake.push(tail)
+    //generate new fruit
+    generateFruit()
+    //add 1 to score
+
+    //speed up game
+  }
   //add styling
   squares[currentSnake[0]].classList.add('snake')
 }
@@ -93,7 +111,7 @@ const control = (e) => {
     
   }
 }
-//document is listening for anytime a key is pressed down and then in runs control()
+//document is listening for anytime a key is pressed down and then it runs control()
 document.addEventListener('keydown', control)
 
 
