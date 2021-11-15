@@ -4,6 +4,8 @@ const startButton = document.querySelector('#start')
 const scoreDisplay = document.querySelector('#score')
 
 //create some required variables
+//time interval
+let timeInterval = 1000
 //player score
 let score = 0
 // a place to generate grid
@@ -73,13 +75,16 @@ const move = () => {
     score++
     scoreDisplay.textContent = score
     //speed up game
+    clearInterval(timerId)
+    timeInterval = timeInterval * 0.9
+    timerId = setInterval(move, timeInterval)
   }
   //add styling
   squares[currentSnake[0]].classList.add('snake')
 }
 
 //snake moves automatically every second (slow af, lol)
-const timerId = setInterval(move, 1000)
+let timerId = setInterval(move, timeInterval)
 
 //generate fruit on screen
 const generateFruit = () => {
