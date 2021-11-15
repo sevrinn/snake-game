@@ -1,10 +1,11 @@
 //get DOM elements
 const grid = document.querySelector('.grid')
 const startButton = document.querySelector('#start')
-const score = document.querySelector('#score')
+const scoreDisplay = document.querySelector('#score')
 
 //create some required variables
-
+//player score
+let score = 0
 // a place to generate grid
 let squares = []
 
@@ -69,7 +70,8 @@ const move = () => {
     //generate new fruit
     generateFruit()
     //add 1 to score
-
+    score++
+    scoreDisplay.textContent = score
     //speed up game
   }
   //add styling
