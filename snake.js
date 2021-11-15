@@ -6,6 +6,8 @@ const scoreDisplay = document.querySelector('#score')
 //create some required variables
 //time interval
 let timeInterval = 1000
+//snake speed
+let speed = 0.9
 //player score
 let score = 0
 // a place to generate grid
@@ -14,10 +16,11 @@ let squares = []
 //our beginning baby snek 🐍
 let currentSnake = [2, 1, 0]
 
-//x axis
+
 let direction = 1
 const width = 10
 let fruitIndex = 0
+let timerId = 0
 
 //to generate the playing field grid
 const createGrid = () => {
@@ -37,6 +40,13 @@ createGrid()
 
 //this draws that ol snake on the page
 currentSnake.forEach(index => squares[index].classList.add('snake'))
+
+const startGame = () => {
+  //snake moves automatically every second (slow af, lol)
+  timerId = setInterval(move, timeInterval)
+}
+
+startButton.addEventListener('click', startGame)
 
 //move the snake
 const move = () => {
@@ -83,8 +93,7 @@ const move = () => {
   squares[currentSnake[0]].classList.add('snake')
 }
 
-//snake moves automatically every second (slow af, lol)
-let timerId = setInterval(move, timeInterval)
+
 
 //generate fruit on screen
 const generateFruit = () => {
@@ -120,5 +129,6 @@ const control = (e) => {
 }
 //document is listening for anytime a key is pressed down and then it runs control()
 document.addEventListener('keydown', control)
+
 
 
